@@ -27,6 +27,7 @@ export default class ClickOutside extends PureComponent {
 
   attachDocumentClick() {
     document.addEventListener('click', (event) => {
+      event.stopImmediatePropagation();
       if (event.target !== this.refs.clickOutside) {
         this.props.callback();
       }
