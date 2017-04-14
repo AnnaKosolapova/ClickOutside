@@ -1,10 +1,5 @@
 import React, { PureComponent, PropTypes } from 'react';
 
-const fn = (event) => {
-  event.stopPropagation();
-  return false;
-};
-
 
 export default class ClickOutside extends PureComponent {
   static propTypes = {
@@ -18,14 +13,15 @@ export default class ClickOutside extends PureComponent {
 
   componentDidMount() {
     document.onclick = this.props.callback;
-    const foo = document.getElementById('foo');
-    foo.onclick = event => fn(event);
   }
 
   render() {
     return (
-      <div id="foo" onClick={fn} style={{ border: '1px solid black' }}>
-        here {this.props.children}
+      <div
+        onClick={event => event.nativeEvent.stopImmediatePropagation()}
+        style={{ width: '200px', border: '10px solid' }}
+      >
+        {this.props.children}
       </div>
     );
   }
