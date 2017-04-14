@@ -1,5 +1,10 @@
-import React,
-{ PureComponent, PropTypes } from 'react';
+import React, { PureComponent, PropTypes } from 'react';
+
+const fn = (event) => {
+  event.stopPropagation();
+  return false;
+};
+
 
 export default class ClickOutside extends PureComponent {
   static propTypes = {
@@ -11,33 +16,16 @@ export default class ClickOutside extends PureComponent {
     children: undefined,
   };
 
-  constructor(props) {
-    super(props);
-
-    this.attachDocumentClick = this.attachDocumentClick.bind(this);
-  }
-
   componentDidMount() {
-    document.addEventListener('click', this.attachDocumentClick);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('click', this.attachDocumentClick);
-  }
-
-  attachDocumentClick() {
-    document.addEventListener('click', (event) => {
-      event.stopImmediatePropagation();
-      if (event.target !== this.refs.clickOutside) {
-        this.props.callback();
-      }
-    });
+    document.onclick = this.props.callback;
+    const foo = document.getElementById('foo');
+    foo.onclick = event => fn(event);
   }
 
   render() {
     return (
-      <div ref="clickOutside">
-        {this.props.children}
+      <div id="foo" onClick={fn} style={{ border: '1px solid black' }}>
+        here {this.props.children}
       </div>
     );
   }

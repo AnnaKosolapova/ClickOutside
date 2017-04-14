@@ -7,7 +7,9 @@ import ClickOutside from './';
 storiesOf('ClickOutside', module)
   .addWithInfo('default', () => (
     <ClickOutside callback={() => console.log('Holla!')}>
-      Kids
+      <p>CHILDREN</p>
+      <p>CHILDREN</p>
+      <p>CHILDREN</p>
     </ClickOutside>
   ))
 ;
