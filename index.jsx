@@ -17,10 +17,7 @@ export default class ClickOutside extends PureComponent {
 
   render() {
     return (
-      <div
-        onClick={event => event.nativeEvent.stopImmediatePropagation()}
-        style={{ width: '200px', border: '10px solid' }}
-      >
+      <div onClick={event => event.nativeEvent.stopImmediatePropagation()}>
         {this.props.children}
       </div>
     );
